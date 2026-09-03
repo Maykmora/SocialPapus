@@ -1,3 +1,6 @@
+import os
+import struct
+
 
 def insertar_comentario():
     code_pub = input(" > Ingresa codigo del comentario (Formato: CM000): ")
@@ -41,6 +44,28 @@ def insertar(file_path:str):
     followers = int(input(" > Ingresa tu cantidad de seguidores: "))
     follow = int(input(" > Ingresa la catnidad de cuentas que sigues: "))
     bio = input(" > Ingresa tu biografia: ")
+
+    # --- INICIO DEL PARCHE PARA PROBAR CÓDIGO ---
+    codigo_bytes = code_user.encode("utf-8").ljust(5, b'\x00')
+    nombre_bytes = name.encode("utf-8")
+    long_nombres = len(nombre_bytes)
+    fecha_bytes = date.encode("utf-8").ljust(10, b'\x00')
+    bio_bytes = bio.encode("utf-8")
+    long_bios = len(bio_bytes)
+    
+    formato = f"<5si{long_nombres}s10siii{long_bios}s"
+    bytes_usuario = struct.pack(formato, codigo_bytes, long_nombres, nombre_bytes, fecha_bytes, followers, follow, long_bios, bio_bytes)
+    
+    tam_usuario = len(bytes_usuario)
+    tam_registro = tam_usuario + 4 
+    
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    with open(file_path, "ab") as f:
+        f.write(struct.pack("<i", tam_registro))
+        f.write(struct.pack("<i", tam_usuario))
+        f.write(bytes_usuario)
+    print("\n[!] Usuario guardado temporalmente en el .bin para pruebas.")
+    # --- FIN DEL PARCHE ---
     
     while True:
         op_pub = input(" > Quieres agregar publicaciones (Y/n): ")
@@ -60,4 +85,5 @@ def insertar(file_path:str):
             insertar_publicacion()
             
 
-insertar('')
+if __name__ == "__main__":
+    insertar("result/usuario.bin")
