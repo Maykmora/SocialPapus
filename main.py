@@ -1,4 +1,5 @@
 import leer
+import insertar
 
 FILE_PATH = "result/usuario.bin"
 
@@ -17,6 +18,9 @@ while True:
     op = input("> Ingresa la opción: ")
     match op:
         
+        case '1':
+            insertar.insertar(FILE_PATH) 
+            
         case '2' | '3':
             leer.leer_y_mostrar_registros()
             
