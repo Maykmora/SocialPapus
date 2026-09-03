@@ -1,3 +1,4 @@
+import leer # <- Esto es nuevo e importante para conectar los archivos
 
 FILE_PATH = "result/usuario.bin"
 
@@ -15,5 +16,13 @@ while True:
     
     op = input("> Ingresa la opción: ")
     match op:
-        
-        case '8': break
+        # Añadimos tus opciones aquí
+        case '2' | '3':
+            leer.leer_y_mostrar_registros()
+            
+        case '4':
+            id_a_buscar = input("Ingresa el ID del usuario a buscar (Ej. US000): ")
+            leer.buscar_por_id(id_a_buscar)
+            
+        case '8': 
+            break
