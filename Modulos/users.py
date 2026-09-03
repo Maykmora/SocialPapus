@@ -4,7 +4,7 @@ def empaquetar_usuario(codigo,nombre,fecha_nacimiento, seguidores,seguidos, bio,
     codigo_bytes=codigo.encode("utf-8")[:5].ljust(5, b'\x00')
     nombre_bytes=nombre.encode("utf-8")
     long_nombre=len(nombre_bytes)
-    fecha_nacimiento_bytes=fecha_nacimiento.encode("utf-8")[:5].ljust(5, b'\x00')
+    fecha_nacimiento_bytes= fecha_nacimiento.encode("utf-8").ljust(5, b'\x00')
     bio_bytes=bio.encode("utf-8")
     long_bio=len(bio_bytes)
 

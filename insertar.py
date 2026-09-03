@@ -1,11 +1,13 @@
 import struct
+from datetime import date as date_fun
+
 from Modulos.Publicaciones import empaquetar_publicacion
 from Modulos.comentarios import empaquetar_comentario
 from Modulos.users import empaquetar_usuario
 
 def insertar_comentario():
     code_pub = input(" > Ingresa codigo del comentario (Formato: CM000): ")
-    date = input(" > Ingresa la fecha de tu comentario (Formato: YYYY/MM/DD): ")
+    date = date_fun.today().strftime("%Y/%m/%d")
     reactions = int(input(" > Ingresa la cantidad de reacciones del comentario: "))
     info = input(" > Ingresa lo que quieres comentar: ")
     
@@ -15,7 +17,7 @@ def insertar_publicacion():
     pub_com, coms = False, []
     
     code_pub = input(" > Ingresa codigo de publicación (Formato: PB000): ")
-    date = input(" > Ingresa la fecha de tu publicación (Formato: YYYY/MM/DD): ")
+    date = date_fun.today().strftime("%Y/%m/%d")
     reactions = int(input(" > Ingresa la cantidad de reacciones: "))
     compartidos = int(input(" > Ingresa la cantidad de compartidos: "))
     
@@ -89,9 +91,9 @@ def insertar(file_path:str):
 
     total_size_register = struct.calcsize("<"+formato_user) +4 #4 porque aun no le he agregado el mismo total_size
     
-    print("F: ",formato_user)
-    print(data_user)
-    print("size total: ", total_size_register)
+    #print("F: ",formato_user)
+    #print(data_user)
+    #print("size total: ", total_size_register)
 
     with open(file_path, 'ab') as file:
         file.write(
