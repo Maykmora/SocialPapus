@@ -91,7 +91,6 @@ def leer_y_mostrar_registros():
             print(f"Fecha Nacimiento: {fecha_nacimiento} | Seguidores: {seguidores} | Seguidos: {seguidos}")
             print(f"Bio: {bio}")
             
-            # Calcular lo que ya leímos y saltar el resto (publicaciones y comentarios)
             bytes_leidos_seccion = 4 + 5 + 4 + long_nombres + 10 + 12 + long_bios
             bytes_restantes = tam_registro - bytes_leidos_seccion - 4 
             if bytes_restantes > 0:
